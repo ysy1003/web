@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysy.pagedemo.mapper.RunInfoMapper">
+    <select id="queryRunInfo" resultType="RunAppInfo">
+        select * from runinfo order by run_time desc
+    </select>
+
+    <select id="queryMaxid" resultType="int">
+        select MAX(id) from runinfo
+    </select>
+
+    <select id="queryNewInfo" resultType="RunAppInfo">
+        select * from runinfo where id> #{id}
+    </select>
+
+    <insert id="addRunInfo" parameterType="RunAppInfo">
+        insert into runinfo(user_name, depart_name, pkg_name, app_name)
+        values(#{userName},#{departName},#{pkgName},#{appName})
+    </insert>
+</mapper>

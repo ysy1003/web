@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysy.pagedemo.mapper.AppMapper">
+
+    <select id="queryLoadAppsByuserId" resultType="AppBean" parameterType="int">
+        select * from loadapps where user_id=#{userId}
+    </select>
+
+    <select id="queryAppByDevice" parameterType="Map" resultType="AppBean">
+        select * from loadapps where user_id=#{userId} and dv_name=#{dvName} and dv_mac=#{dvMac}
+    </select>
+    <select id="selectBypgName" parameterType="String" resultType="AppBean">
+        select * from loadapps where pg_name=#{pgName}
+    </select>
+
+    <select id="qureyAllEnable" parameterType="map" resultType="String">
+        select pg_name from loadapps
+                            where is_enable=1 and user_id=#{userId} and dv_name=#{dvName} and dv_mac=#{dvMac}
+    </select>
+    <select id="queryDeviceByUserId" parameterType="int" resultType="map">
+        select dv_name as dvName,dv_mac as dvMac, os_name as osName from loadapps
+                                                    where user_id=#{userId} group by dv_name, dv_mac, os_name
+    </select>
+
+    <insert id="addLoadApp" parameterType="AppBean">
+        insert into loadapps(dv_mac, dv_name, os_name, user_id, user_name, app_name, pg_name)
+                            values (#{dvMac},#{dvName},#{osName},#{userId},#{userName},#{appName},#{pgName})
+    </insert>
+
+    <update id="changeEnable" parameterType="map">
+        update loadapps set is_enable=1
+                            where dv_mac=#{dvMac} and user_id=#{userId} and pg_name=#{pgName}
+    </update>
+    <update id="changeAllunEnable" >
+        update loadapps set is_enable=0
+                            where 1=1
+    </update>
+    <delete id="deleteLoadAppByuserId" parameterType="int">
+        delete from loadapps where user_id=#{userId}
+    </delete>
+
+
+
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ysy.pagedemo.mapper.EmpMapper">
+
+    <select id="queryEmpList" resultType="Employee">
+        select * from employee
+    </select>
+    <select id="queryEmpByDepartId" resultType="Employee">
+        select * from employee where department_id = #{id}
+    </select>
+    <select id="selectEmpById" resultType="Employee">
+        select * from employee where id = #{id}
+    </select>
+    <select id="loginByUser" parameterType="map" resultType="Employee">
+        select * from employee where name = #{name} and email = #{email} and department_id = #{departId}
+    </select>
+    <select id="selectIdByUser" parameterType="map" resultType="int">
+        select id from employee where name=#{userName} and email=#{userEmail}
+    </select>
+
+
+    <insert id="addEmp" parameterType="Employee">
+        insert into employee(name,email,sex,department_id,birth)
+            values (#{name},#{email},#{sex},#{departmentId},#{birth})
+    </insert>
+    <update id="updateEmp" parameterType="Employee">
+        update employee set name=#{name},email=#{email},sex=#{sex},department_id=#{departmentId},birth=#{birth}
+            where id=#{id}
+    </update>
+    <delete id="deleteEmp" parameterType="int">
+        delete from employee where id = #{id}
+    </delete>
+
+</mapper>

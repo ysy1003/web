@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>IMClauncher后台管理界面</title>
+	<!-- STYLESHEETS -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/owl.carousel.min.css}">
+	<link rel="stylesheet" th:href="@{/css/owl.theme.default.min.css}">
+
+	<link rel="stylesheet" th:href="@{/css/themify-icons.css}">
+	<link rel="stylesheet" th:href="@{/css/main.min.css}">
+</head>
+
+<body>
+	<main class="bg-grey" style="background-image: url(../img/bg1.png);">
+		<div class="d-flex align-items-center mx-auto login-form">
+			<div class="container">
+				<div class="card">
+					<div class="card-body p-5">
+						<form class="form-signin" method="post" th:action="@{/user/login}">
+							<h3 class="title-text mb-5" style="text-align: center"><b>[[#{login.tip}]]</b></h3>
+							<div class="input-group mb-3">
+								<i class="ti-user"></i>
+			                	<input class="form-control form-control-lg" name="username" type="text" th:placeholder="#{login.username}">
+			              	</div>
+			              	<div class="input-group mb-3">
+			              		<i class="ti-lock"></i>
+			                	<input class="form-control form-control-lg" name="password" type="password" th:placeholder="#{login.password}" required="">
+			              	</div>
+							<!--如果msg不为null，就显示-->
+							<p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
+
+							<div style="text-align: center">
+								<a class="btn btn-sm" href="index.html">[[#{login.forget}]]</a>
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+								<a class="btn btn-sm" href="index.html">[[#{login.register}]]</a>
+							</div>
+
+			              	<button class="btn btn-block btn-lg btn-primary mt-2" type="submit">[[#{login.login}]]</button>
+							<div style="text-align: center;border-top: 10px">
+								<a class="btn btn-sm" th:href="@{/index.html(lang='zh_CN')}">中文</a>
+								<a class="btn btn-sm" th:href="@{/index.html(lang='en_US')}">English</a>
+							</div>
+
+
+						</form>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</main>
+
+
+	<!-- SCRIPTS -->
+	<script th:src="@{/js/plugin.js}"></script>
+	<script th:src="@{/js/main.min.js}"></script>
+	
+	
+
+</body>
+
+</html>
